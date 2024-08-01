@@ -28,12 +28,13 @@ func (controller Auth) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = controller.service.Login(requestBody.Email, requestBody.Password)
+	token, err := controller.service.Login(requestBody.Email, requestBody.Password)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
 	}
 
+	w.Write([]byte(token))
 	w.WriteHeader(http.StatusOK)
 }

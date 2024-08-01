@@ -10,7 +10,7 @@ import (
 func Connect() *sql.DB {
 	connection, err := sql.Open("postgres", os.Getenv("DB_STRING"))
 	if err != nil {
-		panic(connection)
+		panic(err)
 	}
 
 	err = connection.Ping()

@@ -2,6 +2,7 @@ package auth
 
 import (
 	"com.redberry.api/domain/repository/users"
+	"com.redberry.api/infrastructure/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -15,11 +16,16 @@ func New() *Service {
 	}
 }
 
-func (service *Service) Login(email, password string) error {
+func (service *Service) Login(email, password string) (string, error) {
 	user, err := service.usersRepo.GetByEmail(email)
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	return bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	if err != nil {
+		return "", err
+	}
+
+	return jwt.Generate(user.IsAdmin)
 }
