@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16.3
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Redberry2024
+      POSTGRES_DB: redberry
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DB_STRING: postgres://postgres:Redberry2024@postgres:5432/redberry?sslmode=disable
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
