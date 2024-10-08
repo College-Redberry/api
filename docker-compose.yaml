@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:16.3
+    image: postgres:bullseye
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Redberry2024
@@ -16,6 +16,3 @@ services:
       DB_STRING: postgres://postgres:Redberry2024@postgres:5432/redberry?sslmode=disable
     depends_on:
       - postgres
-
-volumes:
-  postgres_data:
