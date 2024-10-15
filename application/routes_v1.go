@@ -4,6 +4,7 @@ import (
 	"com.redberry.api/application/controller/auth"
 	"com.redberry.api/application/controller/boards"
 	"com.redberry.api/application/controller/cards"
+	"com.redberry.api/application/controller/messages"
 	"com.redberry.api/application/controller/priorities"
 	"com.redberry.api/application/controller/projects"
 	"com.redberry.api/application/controller/statuses"
@@ -20,6 +21,7 @@ func RoutesV1(router *routegroup.Bundle) {
 	statusesController := statuses.New()
 	prioritiesController := priorities.New()
 	cardsController := cards.New()
+	messagesController := messages.New()
 
 	// Endpoints
 	apiRouter := router.Mount("/api/v1")
@@ -61,6 +63,12 @@ func RoutesV1(router *routegroup.Bundle) {
 	cardsRouter.HandleFunc("GET /{cardID}", cardsController.GetByID)
 	cardsRouter.HandleFunc("PUT /{cardID}", cardsController.Update)
 	cardsRouter.HandleFunc("DELETE /{cardID}", cardsController.Delete)
+
+	messagesRouter := apiRouter.Mount("/messages")
+	messagesRouter.HandleFunc("POST ", messagesController.Create)
+	messagesRouter.HandleFunc("GET /{messageID}", messagesController.GetByID)
+	messagesRouter.HandleFunc("PUT /{messageID}", messagesController.Update)
+	messagesRouter.HandleFunc("DELETE /{messageID}", messagesController.Delete)
 
 
 	// From here, needs to be admin
