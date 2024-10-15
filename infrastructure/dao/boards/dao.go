@@ -97,7 +97,7 @@ func (dao *Dao) Update(boardID int, updates entities.Board) (int64, error) {
 func (dao *Dao) Delete(boardID int) (int64, error) {
 	result, err := dao.db.ExecContext(context.Background(), `
         DELETE FROM task_management.boards WHERE id = $1
-    `)
+    `, boardID)
 	if err != nil {
 		return 0, err
 	}

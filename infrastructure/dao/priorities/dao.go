@@ -81,7 +81,7 @@ func (dao *Dao) Update(priorityID int, updates entities.Priority) (int64, error)
 func (dao *Dao) Delete(priorityID int) (int64, error) {
 	result, err := dao.db.ExecContext(context.Background(), `
         DELETE FROM task_management.priorities WHERE id = $1
-    `)
+    `, priorityID)
 	if err != nil {
 		return 0, err
 	}

@@ -81,7 +81,7 @@ func (dao *Dao) Update(statusID int, updates entities.Status) (int64, error) {
 func (dao *Dao) Delete(statusID int) (int64, error) {
 	result, err := dao.db.ExecContext(context.Background(), `
         DELETE FROM task_management.statuses WHERE id = $1
-    `)
+    `, statusID)
 	if err != nil {
 		return 0, err
 	}

@@ -134,7 +134,7 @@ func (dao *Dao) Update(cardID int, updates entities.Card) (int64, error) {
 func (dao *Dao) Delete(cardID int) (int64, error) {
 	result, err := dao.db.ExecContext(context.Background(), `
         DELETE FROM task_management.cards WHERE id = $1
-    `)
+    `, cardID)
 	if err != nil {
 		return 0, err
 	}

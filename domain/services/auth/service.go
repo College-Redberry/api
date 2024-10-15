@@ -2,17 +2,18 @@ package auth
 
 import (
 	"com.redberry.api/domain/repository/users"
+	dao "com.redberry.api/infrastructure/dao/users"
 	"com.redberry.api/infrastructure/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type Service struct {
-	usersRepo *users.Repository
+	usersRepo users.Repository
 }
 
 func New() *Service {
 	return &Service{
-		usersRepo: users.New(),
+		usersRepo: dao.New(),
 	}
 }
 

@@ -89,7 +89,7 @@ func (dao *Dao) Update(projectID int, updates entities.Project) (int64, error) {
 func (dao *Dao) Delete(projectID int) (int64, error) {
 	result, err := dao.db.ExecContext(context.Background(), `
         DELETE FROM task_management.projects WHERE id = $1
-    `)
+    `, projectID)
 	if err != nil {
 		return 0, err
 	}

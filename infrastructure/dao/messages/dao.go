@@ -93,7 +93,7 @@ func (dao *Dao) Update(messageID int, updates entities.Message) (int64, error) {
 func (dao *Dao) Delete(messageID int) (int64, error) {
 	result, err := dao.db.ExecContext(context.Background(), `
         DELETE FROM task_management.messages WHERE id = $1
-    `)
+    `, messageID)
 	if err != nil {
 		return 0, err
 	}
