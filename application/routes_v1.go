@@ -4,6 +4,7 @@ import (
 	"com.redberry.api/application/controller/auth"
 	"com.redberry.api/application/controller/boards"
 	"com.redberry.api/application/controller/projects"
+	"com.redberry.api/application/controller/statuses"
 	"com.redberry.api/application/controller/users"
 	"com.redberry.api/application/middlewares"
 	"github.com/go-pkgz/routegroup"
@@ -14,6 +15,7 @@ func RoutesV1(router *routegroup.Bundle) {
 	usersController := users.New()
 	projectsController := projects.New()
 	boardsController := boards.New()
+	statusesController := statuses.New()
 
 	// Endpoints
 	apiRouter := router.Mount("/api/v1")
@@ -37,6 +39,12 @@ func RoutesV1(router *routegroup.Bundle) {
 	boardsRouter.HandleFunc("GET /{boardID}", boardsController.GetByID)
 	boardsRouter.HandleFunc("PUT /{boardID}", boardsController.Update)
 	boardsRouter.HandleFunc("DELETE /{boardID}", boardsController.Delete)
+
+	statusesRouter := apiRouter.Mount("/statuses")
+	statusesRouter.HandleFunc("POST ", statusesController.Create)
+	statusesRouter.HandleFunc("GET /{statusID}", statusesController.GetByID)
+	statusesRouter.HandleFunc("PUT /{statusID}", statusesController.Update)
+	statusesRouter.HandleFunc("DELETE /{statusID}", statusesController.Delete)
 
 
 	// From here, needs to be admin
