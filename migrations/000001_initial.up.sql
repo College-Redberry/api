@@ -16,7 +16,7 @@ CREATE TABLE account."users" (
 );
 
 -- Create Tables in Schema: task_management
-CREATE TABLE task_management.projects (
+CREATE TABLE task_management.projectss (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description TEXT,
@@ -32,8 +32,8 @@ CREATE TABLE task_management.boards (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP,
     project_id SMALLINT,
-    FOREIGN KEY (manager_id) REFERENCES account."user"(id),
-    FOREIGN KEY (project_id) REFERENCES task_management.project(id)
+    FOREIGN KEY (manager_id) REFERENCES account."users"(id),
+    FOREIGN KEY (project_id) REFERENCES task_management.projectss(id)
 );
 
 CREATE TABLE task_management.statuses (
@@ -62,11 +62,11 @@ CREATE TABLE task_management.cards (
     assigned_id SMALLINT,
     priority_id SMALLINT,
     parent_card_id SMALLINT,
-    FOREIGN KEY (status_id) REFERENCES task_management.status(id),
-    FOREIGN KEY (manager_id) REFERENCES account."user"(id),
-    FOREIGN KEY (assigned_id) REFERENCES account."user"(id),
-    FOREIGN KEY (priority_id) REFERENCES task_management.priority(id),
-    FOREIGN KEY (parent_card_id) REFERENCES task_management.card(id)
+    FOREIGN KEY (status_id) REFERENCES task_management.statuses(id),
+    FOREIGN KEY (manager_id) REFERENCES account."users"(id),
+    FOREIGN KEY (assigned_id) REFERENCES account."users"(id),
+    FOREIGN KEY (priority_id) REFERENCES task_management.priorities(id),
+    FOREIGN KEY (parent_card_id) REFERENCES task_management.cards(id)
 );
 
 -- Create Tables in Schema: communication
@@ -77,8 +77,8 @@ CREATE TABLE communication.messages (
     updated_at TIMESTAMP,
     user_id SMALLINT,
     parent_message_id SMALLINT,
-    FOREIGN KEY (card_id) REFERENCES task_management.card(id),
-    FOREIGN KEY (user_id) REFERENCES account."user"(id),
+    FOREIGN KEY (card_id) REFERENCES task_management.cards(id),
+    FOREIGN KEY (user_id) REFERENCES account."users"(id),
     FOREIGN KEY (parent_message_id) REFERENCES communication.messages(id)
 );
 
@@ -89,6 +89,6 @@ CREATE TABLE communication.history (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     status_before VARCHAR(50),
     status_after VARCHAR(50),
-    FOREIGN KEY (card_id) REFERENCES task_management.card(id),
-    FOREIGN KEY (user_id) REFERENCES account."user"(id)
+    FOREIGN KEY (card_id) REFERENCES task_management.cards(id),
+    FOREIGN KEY (user_id) REFERENCES account."users"(id)
 );

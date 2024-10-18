@@ -29,9 +29,9 @@ func New() *Controller {
 // @Produce      json
 // @Param        body body      entities.User true "User data"
 // @Success      201  {object}  entities.User "Registered user"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
-// @Router       /api/v1/users/register [post]
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
+// @Router       /api/v1/users [post]
 func (controller Controller) Register(w http.ResponseWriter, r *http.Request) {
 	var requestBody entities.User
 
@@ -64,7 +64,7 @@ func (controller Controller) Register(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        email query     string true "User email"
 // @Success      200  {object}  entities.User "User data"
-// @Failure      500  {object}  string "Internal server error"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/users [get]
 func (controller Controller) GetByEmail(w http.ResponseWriter, r *http.Request) {
 	email := r.URL.Query().Get("email")
@@ -94,8 +94,8 @@ func (controller Controller) GetByEmail(w http.ResponseWriter, r *http.Request) 
 // @Param        user_id path      int true "User ID"
 // @Param        body body      entities.User true "Updated user data"
 // @Success      200  {object}  entities.User "Updated user"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/users/{user_id} [put]
 func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 	userID, err := strconv.Atoi(r.PathValue("user_id"))
@@ -135,8 +135,8 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        user_id path      int true "User ID"
 // @Success      200  {object}  entities.User "Deleted user"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/users/{user_id} [delete]
 func (controller Controller) Delete(w http.ResponseWriter, r *http.Request) {
 	userID, err := strconv.Atoi(r.PathValue("user_id"))

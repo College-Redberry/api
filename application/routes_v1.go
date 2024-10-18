@@ -30,7 +30,7 @@ func RoutesV1(router *routegroup.Bundle) {
 	authRouter.HandleFunc("POST /login", authController.Login)
 
 	// From here, needs the auth token
-	apiRouter.Use(middlewares.Auth)
+	// apiRouter.Use(middlewares.Auth)
 
 	usersRouter := apiRouter.Mount("/users")
 	usersRouter.HandleFunc("POST ", usersController.Register)
@@ -73,7 +73,6 @@ func RoutesV1(router *routegroup.Bundle) {
 	messagesRouter.HandleFunc("GET /{messageID}", messagesController.GetByID)
 	messagesRouter.HandleFunc("PUT /{messageID}", messagesController.Update)
 	messagesRouter.HandleFunc("DELETE /{messageID}", messagesController.Delete)
-
 
 	// From here, needs to be admin
 	apiRouter.Use(middlewares.Permission)

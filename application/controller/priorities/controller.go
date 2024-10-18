@@ -29,8 +29,8 @@ func New() *Controller {
 // @Produce      json
 // @Param        body body      entities.Priority true "Priority data"
 // @Success      201  {object}  entities.Priority "Created priority"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/priorities [post]
 func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 	var requestBody entities.Priority
@@ -64,8 +64,8 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        priority_id path      int true "Priority ID"
 // @Success      200  {object}  entities.Priority "Priority data"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/priorities/{priority_id} [get]
 func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 	priorityID, err := strconv.Atoi(r.PathValue("priority_id"))
@@ -99,8 +99,8 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // @Param        priority_id path      int true "Priority ID"
 // @Param        body body      entities.Priority true "Updated priority data"
 // @Success      200  {object}  entities.Priority "Updated priority"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/priorities/{priority_id} [put]
 func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 	priorityID, err := strconv.Atoi(r.PathValue("priority_id"))
@@ -140,8 +140,8 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        priority_id path      int true "Priority ID"
 // @Success      200  {object}  entities.Priority "Deleted priority"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/priorities/{priority_id} [delete]
 func (controller Controller) Delete(w http.ResponseWriter, r *http.Request) {
 	priorityID, err := strconv.Atoi(r.PathValue("priority_id"))

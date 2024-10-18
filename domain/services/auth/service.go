@@ -28,5 +28,7 @@ func (service *Service) Login(email, password string) (string, error) {
 		return "", err
 	}
 
+	
+
 	return jwt.Generate(user.IsAdmin)
 }

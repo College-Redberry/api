@@ -29,8 +29,8 @@ func New() *Controller {
 // @Produce      json
 // @Param        body body      entities.Message true "Message data"
 // @Success      201  {object}  entities.Message "Created message"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/messages [post]
 func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 	var requestBody entities.Message
@@ -64,8 +64,8 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        message_id path      int true "Message ID"
 // @Success      200  {object}  entities.Message "Message data"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/messages/{message_id} [get]
 func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 	messageID, err := strconv.Atoi(r.PathValue("message_id"))
@@ -99,8 +99,8 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // @Param        message_id path      int true "Message ID"
 // @Param        body body      entities.Message true "Updated message data"
 // @Success      200  {object}  entities.Message "Updated message"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/messages/{message_id} [put]
 func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 	messageID, err := strconv.Atoi(r.PathValue("message_id"))
@@ -140,8 +140,8 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        message_id path      int true "Message ID"
 // @Success      200  {object}  entities.Message "Deleted message"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/messages/{message_id} [delete]
 func (controller Controller) Delete(w http.ResponseWriter, r *http.Request) {
 	messageID, err := strconv.Atoi(r.PathValue("message_id"))

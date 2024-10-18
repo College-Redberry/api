@@ -1,3 +1,111 @@
+definitions:
+  entities.Board:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      manager_id:
+        type: integer
+      name:
+        type: string
+      project_id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  entities.Card:
+    properties:
+      assigned_id:
+        type: integer
+      created_at:
+        type: string
+      description:
+        type: string
+      estimated_finished_at:
+        type: string
+      finished_at:
+        type: string
+      id:
+        type: integer
+      manager_id:
+        type: integer
+      parent_card_id:
+        type: integer
+      priority_id:
+        type: integer
+      start_at:
+        type: string
+      status_id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  entities.Message:
+    properties:
+      card_id:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: integer
+      parent_message_id:
+        type: integer
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  entities.Priority:
+    properties:
+      color:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  entities.Project:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  entities.Status:
+    properties:
+      color:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  entities.User:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      is_admin:
+        type: boolean
+      name:
+        type: string
+      password:
+        type: string
+      profile_image:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
@@ -5,18 +113,24 @@ paths:
     post:
       consumes:
       - application/json
-      description: get user access token
+      description: Authenticates a user and returns an access token.
       parameters:
       - description: Account ID
         in: path
         name: id
         required: true
         type: integer
+      - description: User credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.User'
       produces:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Access token
           schema:
             type: string
         "400":
@@ -24,7 +138,7 @@ paths:
           schema:
             type: string
         "404":
-          description: Not Found
+          description: Not found
           schema:
             type: string
         "500":
@@ -33,5 +147,820 @@ paths:
             type: string
       summary: Login
       tags:
-      - accounts
+      - Auth
+  /api/v1/boards:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new board.
+      parameters:
+      - description: Board data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Board'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created board
+          schema:
+            $ref: '#/definitions/entities.Board'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create Board
+      tags:
+      - boards
+  /api/v1/boards/{board_id}:
+    delete:
+      description: Deletes a board by its ID.
+      parameters:
+      - description: Board ID
+        in: path
+        name: board_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted board
+          schema:
+            $ref: '#/definitions/entities.Board'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete Board
+      tags:
+      - boards
+    get:
+      description: Retrieves a board by its ID.
+      parameters:
+      - description: Board ID
+        in: path
+        name: board_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Board data
+          schema:
+            $ref: '#/definitions/entities.Board'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Board by ID
+      tags:
+      - boards
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing board.
+      parameters:
+      - description: Board ID
+        in: path
+        name: board_id
+        required: true
+        type: integer
+      - description: Updated board data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Board'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated board
+          schema:
+            $ref: '#/definitions/entities.Board'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update Board
+      tags:
+      - boards
+  /api/v1/cards:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new card.
+      parameters:
+      - description: Card data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Card'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created card
+          schema:
+            $ref: '#/definitions/entities.Card'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create Card
+      tags:
+      - cards
+  /api/v1/cards/{card_id}:
+    delete:
+      description: Deletes a card by its ID.
+      parameters:
+      - description: Card ID
+        in: path
+        name: card_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted card
+          schema:
+            $ref: '#/definitions/entities.Card'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete Card
+      tags:
+      - cards
+    get:
+      description: Retrieves a card by its ID.
+      parameters:
+      - description: Card ID
+        in: path
+        name: card_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Card data
+          schema:
+            $ref: '#/definitions/entities.Card'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Card by ID
+      tags:
+      - cards
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing card.
+      parameters:
+      - description: Card ID
+        in: path
+        name: card_id
+        required: true
+        type: integer
+      - description: Updated card data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Card'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated card
+          schema:
+            $ref: '#/definitions/entities.Card'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update Card
+      tags:
+      - cards
+  /api/v1/messages:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new message.
+      parameters:
+      - description: Message data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Message'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created message
+          schema:
+            $ref: '#/definitions/entities.Message'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create Message
+      tags:
+      - messages
+  /api/v1/messages/{message_id}:
+    delete:
+      description: Deletes a message by its ID.
+      parameters:
+      - description: Message ID
+        in: path
+        name: message_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted message
+          schema:
+            $ref: '#/definitions/entities.Message'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete Message
+      tags:
+      - messages
+    get:
+      description: Retrieves a message by its ID.
+      parameters:
+      - description: Message ID
+        in: path
+        name: message_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Message data
+          schema:
+            $ref: '#/definitions/entities.Message'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Message by ID
+      tags:
+      - messages
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing message.
+      parameters:
+      - description: Message ID
+        in: path
+        name: message_id
+        required: true
+        type: integer
+      - description: Updated message data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Message'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated message
+          schema:
+            $ref: '#/definitions/entities.Message'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update Message
+      tags:
+      - messages
+  /api/v1/priorities:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new priority.
+      parameters:
+      - description: Priority data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Priority'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created priority
+          schema:
+            $ref: '#/definitions/entities.Priority'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create Priority
+      tags:
+      - priorities
+  /api/v1/priorities/{priority_id}:
+    delete:
+      description: Deletes a priority by its ID.
+      parameters:
+      - description: Priority ID
+        in: path
+        name: priority_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted priority
+          schema:
+            $ref: '#/definitions/entities.Priority'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete Priority
+      tags:
+      - priorities
+    get:
+      description: Retrieves a priority by its ID.
+      parameters:
+      - description: Priority ID
+        in: path
+        name: priority_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Priority data
+          schema:
+            $ref: '#/definitions/entities.Priority'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Priority by ID
+      tags:
+      - priorities
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing priority.
+      parameters:
+      - description: Priority ID
+        in: path
+        name: priority_id
+        required: true
+        type: integer
+      - description: Updated priority data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Priority'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated priority
+          schema:
+            $ref: '#/definitions/entities.Priority'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update Priority
+      tags:
+      - priorities
+  /api/v1/projects:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new project.
+      parameters:
+      - description: Project data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Project'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created project
+          schema:
+            $ref: '#/definitions/entities.Project'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create Project
+      tags:
+      - projects
+  /api/v1/projects/{project_id}:
+    delete:
+      description: Deletes a project by its ID.
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted project
+          schema:
+            $ref: '#/definitions/entities.Project'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete Project
+      tags:
+      - projects
+    get:
+      description: Retrieves a project by its ID.
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Project data
+          schema:
+            $ref: '#/definitions/entities.Project'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Project by ID
+      tags:
+      - projects
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing project.
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        type: integer
+      - description: Updated project data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Project'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated project
+          schema:
+            $ref: '#/definitions/entities.Project'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update Project
+      tags:
+      - projects
+  /api/v1/statuses:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new status.
+      parameters:
+      - description: Status data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Status'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created status
+          schema:
+            $ref: '#/definitions/entities.Status'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create Status
+      tags:
+      - statuses
+  /api/v1/statuses/{status_id}:
+    delete:
+      description: Deletes a status by its ID.
+      parameters:
+      - description: Status ID
+        in: path
+        name: status_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted status
+          schema:
+            $ref: '#/definitions/entities.Status'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete Status
+      tags:
+      - statuses
+    get:
+      description: Retrieves a status by its ID.
+      parameters:
+      - description: Status ID
+        in: path
+        name: status_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Status data
+          schema:
+            $ref: '#/definitions/entities.Status'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Status by ID
+      tags:
+      - statuses
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing status.
+      parameters:
+      - description: Status ID
+        in: path
+        name: status_id
+        required: true
+        type: integer
+      - description: Updated status data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Status'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated status
+          schema:
+            $ref: '#/definitions/entities.Status'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update Status
+      tags:
+      - statuses
+  /api/v1/users:
+    get:
+      description: Retrieves a user by their email.
+      parameters:
+      - description: User email
+        in: query
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User data
+          schema:
+            $ref: '#/definitions/entities.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get User by Email
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: Registers a new user.
+      parameters:
+      - description: User data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Registered user
+          schema:
+            $ref: '#/definitions/entities.User'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Register User
+      tags:
+      - users
+  /api/v1/users/{user_id}:
+    delete:
+      description: Deletes a user by their ID.
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted user
+          schema:
+            $ref: '#/definitions/entities.User'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete User
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing user.
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: Updated user data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/entities.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated user
+          schema:
+            $ref: '#/definitions/entities.User'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update User
+      tags:
+      - users
 swagger: "2.0"

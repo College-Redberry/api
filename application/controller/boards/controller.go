@@ -27,8 +27,8 @@ func New() *Controller {
 // @Produce      json
 // @Param        body body      entities.Board true "Board data"
 // @Success      201  {object}  entities.Board "Created board"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/boards [post]
 func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 	var requestBody entities.Board
@@ -62,8 +62,8 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        board_id path      int true "Board ID"
 // @Success      200  {object}  entities.Board "Board data"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/boards/{board_id} [get]
 func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 	boardID, err := strconv.Atoi(r.PathValue("board_id"))
@@ -97,8 +97,8 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // @Param        board_id path      int true "Board ID"
 // @Param        body body      entities.Board true "Updated board data"
 // @Success      200  {object}  entities.Board "Updated board"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/boards/{board_id} [put]
 func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 	boardID, err := strconv.Atoi(r.PathValue("board_id"))
@@ -138,8 +138,8 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        board_id path      int true "Board ID"
 // @Success      200  {object}  entities.Board "Deleted board"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/boards/{board_id} [delete]
 func (controller Controller) Delete(w http.ResponseWriter, r *http.Request) {
 	boardID, err := strconv.Atoi(r.PathValue("board_id"))

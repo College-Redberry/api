@@ -29,8 +29,8 @@ func New() *Controller {
 // @Produce      json
 // @Param        body body      entities.Status true "Status data"
 // @Success      201  {object}  entities.Status "Created status"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/statuses [post]
 func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 	var requestBody entities.Status
@@ -64,8 +64,8 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        status_id path      int true "Status ID"
 // @Success      200  {object}  entities.Status "Status data"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/statuses/{status_id} [get]
 func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 	statusID, err := strconv.Atoi(r.PathValue("status_id"))
@@ -99,8 +99,8 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // @Param        status_id path      int true "Status ID"
 // @Param        body body      entities.Status true "Updated status data"
 // @Success      200  {object}  entities.Status "Updated status"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/statuses/{status_id} [put]
 func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 	statusID, err := strconv.Atoi(r.PathValue("status_id"))
@@ -140,8 +140,8 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        status_id path      int true "Status ID"
 // @Success      200  {object}  entities.Status "Deleted status"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/statuses/{status_id} [delete]
 func (controller Controller) Delete(w http.ResponseWriter, r *http.Request) {
 	statusID, err := strconv.Atoi(r.PathValue("status_id"))

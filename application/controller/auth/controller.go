@@ -21,15 +21,15 @@ func New() *Auth {
 // Login godoc
 // @Summary      Login
 // @Description  Authenticates a user and returns an access token.
-// @Tags         accounts
+// @Tags         Auth
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "Account ID"
 // @Param        body body      entities.User true "User credentials"
 // @Success      200  {object}  string "Access token"
-// @Failure      400  {object}  string "Bad request"
+// @failure      400  {string}  string "Bad Request"
 // @Failure      404  {object}  string "Not found"
-// @Failure      500  {object}  string "Internal server error"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/auth/login [post]
 func (controller Auth) Login(w http.ResponseWriter, r *http.Request) {
 	var requestBody entities.User

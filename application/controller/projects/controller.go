@@ -29,8 +29,8 @@ func New() *Project {
 // @Produce      json
 // @Param        body body      entities.Project true "Project data"
 // @Success      201  {object}  entities.Project "Created project"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/projects [post]
 func (controller Project) Create(w http.ResponseWriter, r *http.Request) {
 	var requestBody entities.Project
@@ -64,8 +64,8 @@ func (controller Project) Create(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        project_id path      int true "Project ID"
 // @Success      200  {object}  entities.Project "Project data"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/projects/{project_id} [get]
 func (controller Project) GetByID(w http.ResponseWriter, r *http.Request) {
 	projectID, err := strconv.Atoi(r.PathValue("project_id"))
@@ -99,8 +99,8 @@ func (controller Project) GetByID(w http.ResponseWriter, r *http.Request) {
 // @Param        project_id path      int true "Project ID"
 // @Param        body body      entities.Project true "Updated project data"
 // @Success      200  {object}  entities.Project "Updated project"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/projects/{project_id} [put]
 func (controller Project) Update(w http.ResponseWriter, r *http.Request) {
 	projectID, err := strconv.Atoi(r.PathValue("project_id"))
@@ -140,8 +140,8 @@ func (controller Project) Update(w http.ResponseWriter, r *http.Request) {
 // @Produce      json
 // @Param        project_id path      int true "Project ID"
 // @Success      200  {object}  entities.Project "Deleted project"
-// @Failure      400  {object}  string "Bad request"
-// @Failure      500  {object}  string "Internal server error"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/projects/{project_id} [delete]
 func (controller Project) Delete(w http.ResponseWriter, r *http.Request) {
 	projectID, err := strconv.Atoi(r.PathValue("project_id"))
