@@ -9,16 +9,29 @@ import (
 	"com.redberry.api/domain/services/statuses"
 )
 
+// Controller handles status-related endpoints.
 type Controller struct {
 	service *statuses.Service
 }
 
+// New creates a new instance of the Controller.
 func New() *Controller {
 	return &Controller{
 		service: statuses.New(),
 	}
 }
 
+// Create godoc
+// @Summary      Create Status
+// @Description  Creates a new status.
+// @Tags         statuses
+// @Accept       json
+// @Produce      json
+// @Param        body body      entities.Status true "Status data"
+// @Success      201  {object}  entities.Status "Created status"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
+// @Router       /api/v1/statuses [post]
 func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 	var requestBody entities.Status
 
@@ -40,10 +53,20 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write(response)
 	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
 }
 
+// GetByID godoc
+// @Summary      Get Status by ID
+// @Description  Retrieves a status by its ID.
+// @Tags         statuses
+// @Produce      json
+// @Param        status_id path      int true "Status ID"
+// @Success      200  {object}  entities.Status "Status data"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
+// @Router       /api/v1/statuses/{status_id} [get]
 func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 	statusID, err := strconv.Atoi(r.PathValue("status_id"))
 	if err != nil {
@@ -63,10 +86,22 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write(response)
 	w.WriteHeader(http.StatusOK)
+	w.Write(response)
 }
 
+// Update godoc
+// @Summary      Update Status
+// @Description  Updates an existing status.
+// @Tags         statuses
+// @Accept       json
+// @Produce      json
+// @Param        status_id path      int true "Status ID"
+// @Param        body body      entities.Status true "Updated status data"
+// @Success      200  {object}  entities.Status "Updated status"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
+// @Router       /api/v1/statuses/{status_id} [put]
 func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 	statusID, err := strconv.Atoi(r.PathValue("status_id"))
 	if err != nil {
@@ -94,10 +129,20 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write(response)
 	w.WriteHeader(http.StatusOK)
+	w.Write(response)
 }
 
+// Delete godoc
+// @Summary      Delete Status
+// @Description  Deletes a status by its ID.
+// @Tags         statuses
+// @Produce      json
+// @Param        status_id path      int true "Status ID"
+// @Success      200  {object}  entities.Status "Deleted status"
+// @failure      400  {string}  string "Bad Request"
+// @Failure      500  {string}  string "Internal Server Error"
+// @Router       /api/v1/statuses/{status_id} [delete]
 func (controller Controller) Delete(w http.ResponseWriter, r *http.Request) {
 	statusID, err := strconv.Atoi(r.PathValue("status_id"))
 	if err != nil {
@@ -117,6 +162,6 @@ func (controller Controller) Delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write(response)
 	w.WriteHeader(http.StatusOK)
+	w.Write(response)
 }
