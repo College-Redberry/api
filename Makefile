@@ -19,8 +19,8 @@ stop_db:
 create-migration:
 	migrate create -ext sql -dir migrations -seq $(name)
 
-execute-migrations-up:
+execute-migrations-up: .env
 	migrate -database ${DB_STRING} -path migrations up
 
-execute-migrations-down:
+execute-migrations-down: .env
 	migrate -database ${DB_STRING} -path migrations down
