@@ -35,7 +35,7 @@ func RoutesV1(router *routegroup.Bundle) {
 	usersRouter := apiRouter.Mount("/users")
 	usersRouter.HandleFunc("POST ", usersController.Register)
 	usersRouter.HandleFunc("GET /", usersController.GetByEmail)
-	usersRouter.HandleFunc("UPDATE /{user_id}", usersController.Update)
+	usersRouter.HandleFunc("PUT /{user_id}", usersController.Update)
 	usersRouter.HandleFunc("DELETE /{user_id}", usersController.Delete)
 
 	projectsRouter := apiRouter.Mount("/projects")
