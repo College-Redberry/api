@@ -5,12 +5,12 @@ import (
 )
 
 type Card struct {
-	ID                  int       `json:"id"`
+	ID                  int       `json:"id" swaggerignore:"true"`
 	Title               string    `json:"title"`
 	Description         string    `json:"description"`
-	CreatedAt           time.Time `json:"created_at"`
+	CreatedAt           time.Time `json:"created_at" swaggerignore:"true"`
 	StartAt             time.Time `json:"start_at,omitempty"`
-	UpdatedAt           time.Time `json:"updated_at,omitempty"`
+	UpdatedAt           time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
 	FinishedAt          time.Time `json:"finished_at,omitempty"`
 	EstimatedFinishedAt time.Time `json:"estimated_finished_at,omitempty"`
 	StatusID            int16     `json:"status_id"`

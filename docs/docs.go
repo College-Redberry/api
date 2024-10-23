@@ -1312,14 +1312,8 @@ const docTemplate = `{
         "entities.Board": {
             "type": "object",
             "properties": {
-                "created_at": {
-                    "type": "string"
-                },
                 "description": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "manager_id": {
                     "type": "integer"
@@ -1329,9 +1323,6 @@ const docTemplate = `{
                 },
                 "project_id": {
                     "type": "integer"
-                },
-                "updated_at": {
-                    "type": "string"
                 }
             }
         },
@@ -1341,9 +1332,6 @@ const docTemplate = `{
                 "assigned_id": {
                     "type": "integer"
                 },
-                "created_at": {
-                    "type": "string"
-                },
                 "description": {
                     "type": "string"
                 },
@@ -1352,9 +1340,6 @@ const docTemplate = `{
                 },
                 "finished_at": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "manager_id": {
                     "type": "integer"
@@ -1373,9 +1358,6 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
                 }
             }
         },
@@ -1385,17 +1367,8 @@ const docTemplate = `{
                 "card_id": {
                     "type": "integer"
                 },
-                "created_at": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
                 "parent_message_id": {
                     "type": "integer"
-                },
-                "updated_at": {
-                    "type": "string"
                 },
                 "user_id": {
                     "type": "integer"
@@ -1408,9 +1381,6 @@ const docTemplate = `{
                 "color": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "integer"
-                },
                 "name": {
                     "type": "string"
                 }
@@ -1419,19 +1389,10 @@ const docTemplate = `{
         "entities.Project": {
             "type": "object",
             "properties": {
-                "created_at": {
-                    "type": "string"
-                },
                 "description": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "integer"
-                },
                 "name": {
-                    "type": "string"
-                },
-                "updated_at": {
                     "type": "string"
                 }
             }
@@ -1441,9 +1402,6 @@ const docTemplate = `{
             "properties": {
                 "color": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "name": {
                     "type": "string"
@@ -1455,9 +1413,6 @@ const docTemplate = `{
             "properties": {
                 "email": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "is_admin": {
                     "type": "boolean"

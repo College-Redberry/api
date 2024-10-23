@@ -1301,14 +1301,8 @@
         "entities.Board": {
             "type": "object",
             "properties": {
-                "created_at": {
-                    "type": "string"
-                },
                 "description": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "manager_id": {
                     "type": "integer"
@@ -1318,9 +1312,6 @@
                 },
                 "project_id": {
                     "type": "integer"
-                },
-                "updated_at": {
-                    "type": "string"
                 }
             }
         },
@@ -1330,9 +1321,6 @@
                 "assigned_id": {
                     "type": "integer"
                 },
-                "created_at": {
-                    "type": "string"
-                },
                 "description": {
                     "type": "string"
                 },
@@ -1341,9 +1329,6 @@
                 },
                 "finished_at": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "manager_id": {
                     "type": "integer"
@@ -1362,9 +1347,6 @@
                 },
                 "title": {
                     "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
                 }
             }
         },
@@ -1374,17 +1356,8 @@
                 "card_id": {
                     "type": "integer"
                 },
-                "created_at": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
                 "parent_message_id": {
                     "type": "integer"
-                },
-                "updated_at": {
-                    "type": "string"
                 },
                 "user_id": {
                     "type": "integer"
@@ -1397,9 +1370,6 @@
                 "color": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "integer"
-                },
                 "name": {
                     "type": "string"
                 }
@@ -1408,19 +1378,10 @@
         "entities.Project": {
             "type": "object",
             "properties": {
-                "created_at": {
-                    "type": "string"
-                },
                 "description": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "integer"
-                },
                 "name": {
-                    "type": "string"
-                },
-                "updated_at": {
                     "type": "string"
                 }
             }
@@ -1430,9 +1391,6 @@
             "properties": {
                 "color": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "name": {
                     "type": "string"
@@ -1444,9 +1402,6 @@
             "properties": {
                 "email": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "is_admin": {
                     "type": "boolean"

@@ -1,35 +1,25 @@
 definitions:
   entities.Board:
     properties:
-      created_at:
-        type: string
       description:
         type: string
-      id:
-        type: integer
       manager_id:
         type: integer
       name:
         type: string
       project_id:
         type: integer
-      updated_at:
-        type: string
     type: object
   entities.Card:
     properties:
       assigned_id:
         type: integer
-      created_at:
-        type: string
       description:
         type: string
       estimated_finished_at:
         type: string
       finished_at:
         type: string
-      id:
-        type: integer
       manager_id:
         type: integer
       parent_card_id:
@@ -42,21 +32,13 @@ definitions:
         type: integer
       title:
         type: string
-      updated_at:
-        type: string
     type: object
   entities.Message:
     properties:
       card_id:
         type: integer
-      created_at:
-        type: string
-      id:
-        type: integer
       parent_message_id:
         type: integer
-      updated_at:
-        type: string
       user_id:
         type: integer
     type: object
@@ -64,30 +46,20 @@ definitions:
     properties:
       color:
         type: string
-      id:
-        type: integer
       name:
         type: string
     type: object
   entities.Project:
     properties:
-      created_at:
-        type: string
       description:
         type: string
-      id:
-        type: integer
       name:
-        type: string
-      updated_at:
         type: string
     type: object
   entities.Status:
     properties:
       color:
         type: string
-      id:
-        type: integer
       name:
         type: string
     type: object
@@ -95,8 +67,6 @@ definitions:
     properties:
       email:
         type: string
-      id:
-        type: integer
       is_admin:
         type: boolean
       name:
