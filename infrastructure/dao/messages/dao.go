@@ -31,7 +31,7 @@ func (dao *Dao) GetByID(messageID int) (entities.Message, error) {
             updated_at,
             user_id,
             parent_message_id
-        FROM task_management.messages WHERE id=$1
+        FROM communication.messages WHERE id=$1
     `, messageID)
 	if err != nil {
 		return entities.Message{}, err
@@ -48,55 +48,63 @@ func (dao *Dao) GetByID(messageID int) (entities.Message, error) {
 }
 
 func (dao *Dao) Create(message entities.Message) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        INSERT INTO task_management.messages (
+	var id int64
+
+	var parentMessageID *int16
+	if message.ParentMessageID != 0 {
+		parentMessageID = &message.ParentMessageID
+	}
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		INSERT INTO communication.messages (
             card_id,
-            NOW(),
             user_id,
             parent_message_id
-        ) VALUES ($1, $2, $3, $4)
+        ) VALUES ($1, $2, $3)
         RETURNING id
     `,
 		message.CardID,
 		message.UserID,
-		message.ParentMessageID,
+		parentMessageID,
 	)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Update(messageID int, updates entities.Message) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        UPDATE task_management.messages
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		UPDATE communication.messages
         SET 
             card_id = COALESCE($2, card_id),
             updated_at = NOW(),
-            user_id = COALESCE($3, user_id),
-            parent_message_id = COALESCE($4, parent_message_id)
-        WHERE id = $1
+            user_id = COALESCE($3, user_id)
+        WHERE id = $1 RETURNING id
     `,
 		messageID,
 		updates.CardID,
 		updates.UserID,
-		updates.ParentMessageID,
 	)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Delete(messageID int) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        DELETE FROM task_management.messages WHERE id = $1
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		DELETE FROM communication.messages WHERE id = $1 RETURNING id
     `, messageID)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }

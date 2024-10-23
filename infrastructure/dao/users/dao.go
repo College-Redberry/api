@@ -3,7 +3,6 @@ package users
 import (
 	"context"
 	"database/sql"
-	"time"
 
 	"com.redberry.api/domain/entities"
 	"com.redberry.api/infrastructure/models"
@@ -42,45 +41,50 @@ func (dao Dao) GetByEmail(email string) (entities.User, error) {
 }
 
 func (dao Dao) Create(user entities.User) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `		
 		INSERT INTO account."users"
 		("name", email, "password", is_admin, profile_image)
 		VALUES($1, $2, $3, $4, $5)
+		RETURNING id
 	`, user.Name, user.Email, user.Password, user.IsAdmin, user.ProfileImage)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 func (dao *Dao) Update(userID int, updates entities.User) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        UPDATE account.users 
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		UPDATE account.users 
         SET 
             name = COALESCE($2, name),
-            profile_image = COALESCE($3, profile_image),
-            updated_at = $4
-        WHERE id = $1
+            profile_image = COALESCE($3, profile_image)
+        WHERE id = $1 RETURNING id
     `,
 		userID,
 		updates.Name,
 		updates.ProfileImage,
-		time.Now(),
 	)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Delete(userD int) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        DELETE FROM account.users WHERE id = $1
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		DELETE FROM account.users WHERE id = $1 RETURNING id
     `, userD)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }

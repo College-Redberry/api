@@ -3,7 +3,6 @@ package dao
 import (
 	"context"
 	"database/sql"
-	"time"
 
 	"com.redberry.api/domain/entities"
 	"com.redberry.api/infrastructure/models"
@@ -51,56 +50,62 @@ func (dao *Dao) GetByID(boardID int) (entities.Board, error) {
 }
 
 func (dao *Dao) Create(board entities.Board) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `
         INSERT INTO task_management.boards (
             name,
             description,
             manager_id,
-            NOW()
+			project_id
         ) VALUES ($1, $2, $3, $4)
         RETURNING id
     `,
 		board.Name,
 		board.Description,
 		board.ManagerID,
+		board.ProjectID,
 	)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Update(boardID int, updates entities.Board) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        UPDATE task_management.boards
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		UPDATE task_management.boards
         SET 
             name = COALESCE($2, name),
             description = COALESCE($3, description),
             manager_id = COALESCE($4, manager_id),
-            updated_at = $5
-        WHERE id = $1
+            updated_at = NOW()
+        WHERE id = $1 RETURNING id
     `,
 		boardID,
 		updates.Name,
 		updates.Description,
 		updates.ManagerID,
-		time.Now(),
 	)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Delete(boardID int) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        DELETE FROM task_management.boards WHERE id = $1
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `       
+		DELETE FROM task_management.boards WHERE id = $1 RETURNING id
     `, boardID)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }

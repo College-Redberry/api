@@ -3,7 +3,6 @@ package dao
 import (
 	"context"
 	"database/sql"
-	"time"
 
 	"com.redberry.api/domain/entities"
 	"com.redberry.api/infrastructure/models"
@@ -47,12 +46,13 @@ func (dao *Dao) GetByID(projectID int) (entities.Project, error) {
 }
 
 func (dao *Dao) Create(project entities.Project) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        INSERT INTO task_management.projectss (
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		INSERT INTO task_management.projectss (
             name,
-            description,
-            NOW()
-        ) VALUES ($1, $2, $3)
+            description
+        ) VALUES ($1, $2)
         RETURNING id
     `,
 		project.Name,
@@ -62,37 +62,40 @@ func (dao *Dao) Create(project entities.Project) (int64, error) {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Update(projectID int, updates entities.Project) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        UPDATE task_management.projectss
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		UPDATE task_management.projectss
         SET 
             name = COALESCE($2, name),
             description = COALESCE($3, description),
-            updated_at = $4
-        WHERE id = $1
+            updated_at = NOW()
+        WHERE id = $1 RETURNING id
     `,
 		projectID,
 		updates.Name,
 		updates.Description,
-		time.Now(),
 	)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Delete(projectID int) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        DELETE FROM task_management.projectss WHERE id = $1
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		DELETE FROM task_management.projectss WHERE id = $1 RETURNING id
     `, projectID)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }

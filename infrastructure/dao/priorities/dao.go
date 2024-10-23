@@ -42,8 +42,10 @@ func (dao *Dao) GetByID(priorityID int) (entities.Priority, error) {
 }
 
 func (dao *Dao) Create(priority entities.Priority) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        INSERT INTO task_management.priorities (
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		INSERT INTO task_management.priorities (
             name,
             color
         ) VALUES ($1, $2)
@@ -56,16 +58,18 @@ func (dao *Dao) Create(priority entities.Priority) (int64, error) {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Update(priorityID int, updates entities.Priority) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        UPDATE task_management.priorities
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		UPDATE task_management.priorities
         SET 
             name = COALESCE($2, name),
             color = COALESCE($3, color)
-        WHERE id = $1
+        WHERE id = $1 RETURNING id
     `,
 		priorityID,
 		updates.Name,
@@ -75,16 +79,18 @@ func (dao *Dao) Update(priorityID int, updates entities.Priority) (int64, error)
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
 
 func (dao *Dao) Delete(priorityID int) (int64, error) {
-	result, err := dao.db.ExecContext(context.Background(), `
-        DELETE FROM task_management.priorities WHERE id = $1
+	var id int64
+
+	err := sqlscan.Get(context.Background(), dao.db, &id, `        
+		DELETE FROM task_management.priorities WHERE id = $1 RETURNING id
     `, priorityID)
 	if err != nil {
 		return 0, err
 	}
 
-	return result.LastInsertId()
+	return id, nil
 }
