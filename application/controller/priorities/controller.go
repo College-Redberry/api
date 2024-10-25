@@ -24,6 +24,7 @@ func New() *Controller {
 // Create godoc
 // @Summary      Create Priority
 // @Description  Creates a new priority.
+// @Security BearerAuth
 // @Tags         priorities
 // @Accept       json
 // @Produce      json
@@ -60,6 +61,7 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // GetByID godoc
 // @Summary      Get Priority by ID
 // @Description  Retrieves a priority by its ID.
+// @Security BearerAuth
 // @Tags         priorities
 // @Produce      json
 // @Param        priority_id path      int true "Priority ID"
@@ -93,6 +95,7 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // Update godoc
 // @Summary      Update Priority
 // @Description  Updates an existing priority.
+// @Security BearerAuth
 // @Tags         priorities
 // @Accept       json
 // @Produce      json
@@ -136,6 +139,7 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // Delete godoc
 // @Summary      Delete Priority
 // @Description  Deletes a priority by its ID.
+// @Security BearerAuth
 // @Tags         priorities
 // @Produce      json
 // @Param        priority_id path      int true "Priority ID"

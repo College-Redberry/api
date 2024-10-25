@@ -24,6 +24,7 @@ func New() *Controller {
 // Register godoc
 // @Summary      Register User
 // @Description  Registers a new user.
+// @Security BearerAuth
 // @Tags         users
 // @Accept       json
 // @Produce      json
@@ -60,6 +61,7 @@ func (controller Controller) Register(w http.ResponseWriter, r *http.Request) {
 // GetByEmail godoc
 // @Summary      Get User by Email
 // @Description  Retrieves a user by their email.
+// @Security BearerAuth
 // @Tags         users
 // @Produce      json
 // @Param        email query     string true "User email"
@@ -88,6 +90,7 @@ func (controller Controller) GetByEmail(w http.ResponseWriter, r *http.Request) 
 // Update godoc
 // @Summary      Update User
 // @Description  Updates an existing user.
+// @Security BearerAuth
 // @Tags         users
 // @Accept       json
 // @Produce      json
@@ -131,6 +134,7 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // Delete godoc
 // @Summary      Delete User
 // @Description  Deletes a user by their ID.
+// @Security BearerAuth
 // @Tags         users
 // @Produce      json
 // @Param        user_id path      int true "User ID"

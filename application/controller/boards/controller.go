@@ -22,6 +22,7 @@ func New() *Controller {
 // Create godoc
 // @Summary      Create Board
 // @Description  Creates a new board.
+// @Security BearerAuth
 // @Tags         boards
 // @Accept       json
 // @Produce      json
@@ -58,6 +59,7 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // GetByID godoc
 // @Summary      Get Board by ID
 // @Description  Retrieves a board by its ID.
+// @Security BearerAuth
 // @Tags         boards
 // @Produce      json
 // @Param        board_id path      int true "Board ID"
@@ -91,6 +93,7 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // Update godoc
 // @Summary      Update Board
 // @Description  Updates an existing board.
+// @Security BearerAuth
 // @Tags         boards
 // @Accept       json
 // @Produce      json
@@ -134,6 +137,7 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // Delete godoc
 // @Summary      Delete Board
 // @Description  Deletes a board by its ID.
+// @Security BearerAuth
 // @Tags         boards
 // @Produce      json
 // @Param        board_id path      int true "Board ID"

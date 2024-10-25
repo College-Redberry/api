@@ -24,6 +24,7 @@ func New() *Controller {
 // Create godoc
 // @Summary      Create Status
 // @Description  Creates a new status.
+// @Security BearerAuth
 // @Tags         statuses
 // @Accept       json
 // @Produce      json
@@ -60,6 +61,7 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // GetByID godoc
 // @Summary      Get Status by ID
 // @Description  Retrieves a status by its ID.
+// @Security BearerAuth
 // @Tags         statuses
 // @Produce      json
 // @Param        status_id path      int true "Status ID"
@@ -93,6 +95,7 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // Update godoc
 // @Summary      Update Status
 // @Description  Updates an existing status.
+// @Security BearerAuth
 // @Tags         statuses
 // @Accept       json
 // @Produce      json
@@ -136,6 +139,7 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // Delete godoc
 // @Summary      Delete Status
 // @Description  Deletes a status by its ID.
+// @Security BearerAuth
 // @Tags         statuses
 // @Produce      json
 // @Param        status_id path      int true "Status ID"

@@ -24,6 +24,7 @@ func New() *Controller {
 // Create godoc
 // @Summary      Create Message
 // @Description  Creates a new message.
+// @Security BearerAuth
 // @Tags         messages
 // @Accept       json
 // @Produce      json
@@ -60,6 +61,7 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // GetByID godoc
 // @Summary      Get Message by ID
 // @Description  Retrieves a message by its ID.
+// @Security BearerAuth
 // @Tags         messages
 // @Produce      json
 // @Param        message_id path      int true "Message ID"
@@ -93,6 +95,7 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // Update godoc
 // @Summary      Update Message
 // @Description  Updates an existing message.
+// @Security BearerAuth
 // @Tags         messages
 // @Accept       json
 // @Produce      json
@@ -136,6 +139,7 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // Delete godoc
 // @Summary      Delete Message
 // @Description  Deletes a message by its ID.
+// @Security BearerAuth
 // @Tags         messages
 // @Produce      json
 // @Param        message_id path      int true "Message ID"

@@ -24,15 +24,14 @@ func New() *Auth {
 // @Tags         Auth
 // @Accept       json
 // @Produce      json
-// @Param        id   path      int  true  "Account ID"
-// @Param        body body      entities.User true "User credentials"
+// @Param        body body      entities.LoginRequest true "User credentials"  // Atualização aqui
 // @Success      200  {object}  string "Access token"
 // @failure      400  {string}  string "Bad Request"
 // @Failure      404  {object}  string "Not found"
 // @Failure      500  {string}  string "Internal Server Error"
 // @Router       /api/v1/auth/login [post]
 func (controller Auth) Login(w http.ResponseWriter, r *http.Request) {
-	var requestBody entities.User
+	var requestBody entities.LoginRequest  // Atualização aqui
 
 	err := json.NewDecoder(r.Body).Decode(&requestBody)
 	if err != nil {

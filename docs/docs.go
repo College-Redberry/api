@@ -76,6 +76,11 @@ const docTemplate = `{
         },
         "/api/v1/boards": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates a new board.",
                 "consumes": [
                     "application/json"
@@ -122,6 +127,11 @@ const docTemplate = `{
         },
         "/api/v1/boards/{board_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a board by its ID.",
                 "produces": [
                     "application/json"
@@ -161,6 +171,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Updates an existing board.",
                 "consumes": [
                     "application/json"
@@ -212,6 +227,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Deletes a board by its ID.",
                 "produces": [
                     "application/json"
@@ -253,6 +273,11 @@ const docTemplate = `{
         },
         "/api/v1/cards": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates a new card.",
                 "consumes": [
                     "application/json"
@@ -299,6 +324,11 @@ const docTemplate = `{
         },
         "/api/v1/cards/{card_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a card by its ID.",
                 "produces": [
                     "application/json"
@@ -338,6 +368,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Updates an existing card.",
                 "consumes": [
                     "application/json"
@@ -389,6 +424,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Deletes a card by its ID.",
                 "produces": [
                     "application/json"
@@ -430,6 +470,11 @@ const docTemplate = `{
         },
         "/api/v1/messages": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates a new message.",
                 "consumes": [
                     "application/json"
@@ -476,6 +521,11 @@ const docTemplate = `{
         },
         "/api/v1/messages/{message_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a message by its ID.",
                 "produces": [
                     "application/json"
@@ -515,6 +565,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Updates an existing message.",
                 "consumes": [
                     "application/json"
@@ -566,6 +621,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Deletes a message by its ID.",
                 "produces": [
                     "application/json"
@@ -607,6 +667,11 @@ const docTemplate = `{
         },
         "/api/v1/priorities": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates a new priority.",
                 "consumes": [
                     "application/json"
@@ -653,6 +718,11 @@ const docTemplate = `{
         },
         "/api/v1/priorities/{priority_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a priority by its ID.",
                 "produces": [
                     "application/json"
@@ -692,6 +762,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Updates an existing priority.",
                 "consumes": [
                     "application/json"
@@ -743,6 +818,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Deletes a priority by its ID.",
                 "produces": [
                     "application/json"
@@ -784,6 +864,11 @@ const docTemplate = `{
         },
         "/api/v1/projects": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates a new project.",
                 "consumes": [
                     "application/json"
@@ -830,6 +915,11 @@ const docTemplate = `{
         },
         "/api/v1/projects/{project_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a project by its ID.",
                 "produces": [
                     "application/json"
@@ -869,6 +959,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Updates an existing project.",
                 "consumes": [
                     "application/json"
@@ -920,6 +1015,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Deletes a project by its ID.",
                 "produces": [
                     "application/json"
@@ -961,6 +1061,11 @@ const docTemplate = `{
         },
         "/api/v1/statuses": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates a new status.",
                 "consumes": [
                     "application/json"
@@ -1007,6 +1112,11 @@ const docTemplate = `{
         },
         "/api/v1/statuses/{status_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a status by its ID.",
                 "produces": [
                     "application/json"
@@ -1046,6 +1156,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Updates an existing status.",
                 "consumes": [
                     "application/json"
@@ -1097,6 +1212,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Deletes a status by its ID.",
                 "produces": [
                     "application/json"
@@ -1138,6 +1258,11 @@ const docTemplate = `{
         },
         "/api/v1/users": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Retrieves a user by their email.",
                 "produces": [
                     "application/json"
@@ -1171,6 +1296,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Registers a new user.",
                 "consumes": [
                     "application/json"
@@ -1217,6 +1347,11 @@ const docTemplate = `{
         },
         "/api/v1/users/{user_id}": {
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Updates an existing user.",
                 "consumes": [
                     "application/json"
@@ -1268,6 +1403,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Deletes a user by their ID.",
                 "produces": [
                     "application/json"
@@ -1427,6 +1567,13 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`

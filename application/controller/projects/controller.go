@@ -24,6 +24,7 @@ func New() *Project {
 // Create godoc
 // @Summary      Create Project
 // @Description  Creates a new project.
+// @Security BearerAuth
 // @Tags         projects
 // @Accept       json
 // @Produce      json
@@ -60,6 +61,7 @@ func (controller Project) Create(w http.ResponseWriter, r *http.Request) {
 // GetByID godoc
 // @Summary      Get Project by ID
 // @Description  Retrieves a project by its ID.
+// @Security BearerAuth
 // @Tags         projects
 // @Produce      json
 // @Param        project_id path      int true "Project ID"
@@ -93,6 +95,7 @@ func (controller Project) GetByID(w http.ResponseWriter, r *http.Request) {
 // Update godoc
 // @Summary      Update Project
 // @Description  Updates an existing project.
+// @Security BearerAuth
 // @Tags         projects
 // @Accept       json
 // @Produce      json
@@ -136,6 +139,7 @@ func (controller Project) Update(w http.ResponseWriter, r *http.Request) {
 // Delete godoc
 // @Summary      Delete Project
 // @Description  Deletes a project by its ID.
+// @Security BearerAuth
 // @Tags         projects
 // @Produce      json
 // @Param        project_id path      int true "Project ID"

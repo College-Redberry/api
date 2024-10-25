@@ -24,6 +24,7 @@ func New() *Controller {
 // Create godoc
 // @Summary      Create Card
 // @Description  Creates a new card.
+// @Security BearerAuth
 // @Tags         cards
 // @Accept       json
 // @Produce      json
@@ -60,6 +61,7 @@ func (controller Controller) Create(w http.ResponseWriter, r *http.Request) {
 // GetByID godoc
 // @Summary      Get Card by ID
 // @Description  Retrieves a card by its ID.
+// @Security BearerAuth
 // @Tags         cards
 // @Produce      json
 // @Param        card_id path      int true "Card ID"
@@ -93,6 +95,7 @@ func (controller Controller) GetByID(w http.ResponseWriter, r *http.Request) {
 // Update godoc
 // @Summary      Update Card
 // @Description  Updates an existing card.
+// @Security BearerAuth
 // @Tags         cards
 // @Accept       json
 // @Produce      json
@@ -136,6 +139,7 @@ func (controller Controller) Update(w http.ResponseWriter, r *http.Request) {
 // Delete godoc
 // @Summary      Delete Card
 // @Description  Deletes a card by its ID.
+// @Security BearerAuth
 // @Tags         cards
 // @Produce      json
 // @Param        card_id path      int true "Card ID"

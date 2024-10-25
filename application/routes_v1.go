@@ -30,7 +30,7 @@ func RoutesV1(router *routegroup.Bundle) {
 	authRouter.HandleFunc("POST /login", authController.Login)
 
 	// From here, needs the auth token
-	// apiRouter.Use(middlewares.Auth)
+	apiRouter.Use(middlewares.Auth)
 
 	usersRouter := apiRouter.Mount("/users")
 	usersRouter.HandleFunc("POST ", usersController.Register)

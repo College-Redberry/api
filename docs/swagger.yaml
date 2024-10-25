@@ -145,6 +145,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Create Board
       tags:
       - boards
@@ -172,6 +174,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Delete Board
       tags:
       - boards
@@ -198,6 +202,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Get Board by ID
       tags:
       - boards
@@ -232,6 +238,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Update Board
       tags:
       - boards
@@ -262,6 +270,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Create Card
       tags:
       - cards
@@ -289,6 +299,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Delete Card
       tags:
       - cards
@@ -315,6 +327,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Get Card by ID
       tags:
       - cards
@@ -349,6 +363,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Update Card
       tags:
       - cards
@@ -379,6 +395,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Create Message
       tags:
       - messages
@@ -406,6 +424,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Delete Message
       tags:
       - messages
@@ -432,6 +452,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Get Message by ID
       tags:
       - messages
@@ -466,6 +488,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Update Message
       tags:
       - messages
@@ -496,6 +520,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Create Priority
       tags:
       - priorities
@@ -523,6 +549,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Delete Priority
       tags:
       - priorities
@@ -549,6 +577,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Get Priority by ID
       tags:
       - priorities
@@ -583,6 +613,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Update Priority
       tags:
       - priorities
@@ -613,6 +645,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Create Project
       tags:
       - projects
@@ -640,6 +674,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Delete Project
       tags:
       - projects
@@ -666,6 +702,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Get Project by ID
       tags:
       - projects
@@ -700,6 +738,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Update Project
       tags:
       - projects
@@ -730,6 +770,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Create Status
       tags:
       - statuses
@@ -757,6 +799,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Delete Status
       tags:
       - statuses
@@ -783,6 +827,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Get Status by ID
       tags:
       - statuses
@@ -817,6 +863,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Update Status
       tags:
       - statuses
@@ -840,6 +888,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Get User by Email
       tags:
       - users
@@ -869,6 +919,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Register User
       tags:
       - users
@@ -896,6 +948,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Delete User
       tags:
       - users
@@ -930,7 +984,14 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - BearerAuth: []
       summary: Update User
       tags:
       - users
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

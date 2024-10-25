@@ -7,7 +7,7 @@ import (
 	"com.redberry.api/application/middlewares"
 	_ "com.redberry.api/docs"
 	"github.com/go-pkgz/routegroup"
-	httpSwagger "github.com/swaggo/http-swagger" // http-swagger middleware
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 func InitHttpRoutes() {
