@@ -30,7 +30,7 @@ func (dao *Dao) GetByID(projectID int) (entities.Project, error) {
             description,
             created_at,
             updated_at
-        FROM task_management.projectss WHERE id=$1
+        FROM task_management.projects WHERE id=$1
     `, projectID)
 	if err != nil {
 		return entities.Project{}, err
@@ -49,7 +49,7 @@ func (dao *Dao) Create(project entities.Project) (int64, error) {
 	var id int64
 
 	err := sqlscan.Get(context.Background(), dao.db, &id, `        
-		INSERT INTO task_management.projectss (
+		INSERT INTO task_management.projects (
             name,
             description
         ) VALUES ($1, $2)
@@ -69,7 +69,7 @@ func (dao *Dao) Update(projectID int, updates entities.Project) (int64, error) {
 	var id int64
 
 	err := sqlscan.Get(context.Background(), dao.db, &id, `        
-		UPDATE task_management.projectss
+		UPDATE task_management.projects
         SET 
             name = COALESCE($2, name),
             description = COALESCE($3, description),
@@ -91,7 +91,7 @@ func (dao *Dao) Delete(projectID int) (int64, error) {
 	var id int64
 
 	err := sqlscan.Get(context.Background(), dao.db, &id, `        
-		DELETE FROM task_management.projectss WHERE id = $1 RETURNING id
+		DELETE FROM task_management.projects WHERE id = $1 RETURNING id
     `, projectID)
 	if err != nil {
 		return 0, err

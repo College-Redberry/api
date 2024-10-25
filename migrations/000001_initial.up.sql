@@ -16,7 +16,7 @@ CREATE TABLE account."users" (
 );
 
 -- Create Tables in Schema: task_management
-CREATE TABLE task_management.projectss (
+CREATE TABLE task_management.projects (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description TEXT,
@@ -33,7 +33,7 @@ CREATE TABLE task_management.boards (
     updated_at TIMESTAMP,
     project_id SMALLINT,
     FOREIGN KEY (manager_id) REFERENCES account."users"(id),
-    FOREIGN KEY (project_id) REFERENCES task_management.projectss(id)
+    FOREIGN KEY (project_id) REFERENCES task_management.projects(id)
 );
 
 CREATE TABLE task_management.statuses (
