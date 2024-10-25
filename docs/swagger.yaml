@@ -85,11 +85,6 @@ paths:
       - application/json
       description: Authenticates a user and returns an access token.
       parameters:
-      - description: Account ID
-        in: path
-        name: id
-        required: true
-        type: integer
       - description: User credentials
         in: body
         name: body
