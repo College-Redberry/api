@@ -78,6 +78,9 @@ definitions:
     type: object
 info:
   contact: {}
+  description: Project management system.
+  title: Redberry API
+  version: "1.0"
 paths:
   /api/v1/auth/login:
     post:

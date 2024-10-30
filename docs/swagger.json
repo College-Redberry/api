@@ -1,7 +1,10 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "Project management system.",
+        "title": "Redberry API",
+        "contact": {},
+        "version": "1.0"
     },
     "paths": {
         "/api/v1/auth/login": {
